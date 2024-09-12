@@ -1,0 +1,11 @@
+id: guacamole-workflow
+
+info:
+  name: Guacamole detetection and config grabber
+  author: roguespider
+  severity: info
+
+workflows:
+  - template: nuclei-templates/nuclei-templates-chaos/guacamole-detection.yaml
+    subtemplates:
+      - template: nuclei-templates/nuclei-templates-chaos/guacamole-config.yaml

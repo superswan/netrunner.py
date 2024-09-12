@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scan-template>
+  <name>filebrowser</name>
+  <shodan-query>http.html:"window.FileBrowser"</shodan-query>
+  <nuclei-command>nuclei -l data/${name}/targets.txt -w nuclei-templates-chaos/file-browser-workflow.yaml -o data/${name}/${name}-nuclei.json -j -v</nuclei-command>
+  <parse-command>jq -r 'select(.info.severity == "high") | .url' data/${name}/filebrowser-output.txt</parse-command>
+</scan-template>

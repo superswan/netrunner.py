@@ -1,0 +1,39 @@
+id: file-browser-auth-check
+
+info:
+  name: File Browser Authentication Check
+  author: roguespider
+  severity: high
+  description: Detects unauthenticated File Browser instances which could allow unauthorized access to files.
+  tags:
+    - file-browser
+    - auth-check
+    - misconfig
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "window.FileBrowser"
+        part: body
+      - type: word
+        words:
+          - '"NoAuth":true'
+          - '"AuthMethod":"noauth"'
+        condition: or
+        part: body
+
+    extractors:
+      - type: regex
+        name: version
+        part: body
+        regex:
+          - '"Version":"([0-9.]+)"'

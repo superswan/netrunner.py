@@ -1,0 +1,14 @@
+id: kasmvnc-detection-screenshot-workflow
+
+info:
+  name: KasmVNC Detection and Screenshot Workflow
+  author: roguespider
+  severity: info
+
+workflows:
+  - template: nuclei-templates/nuclei-templates-chaos/kasmvnc-detection.yaml
+    subtemplates:
+      - template: nuclei-templates/nuclei-templates-chaos/kasmvnc-detection.yaml
+      - template: nuclei-templates/nuclei-templates-chaos/kasmvnc-screenshot.yaml
+
+

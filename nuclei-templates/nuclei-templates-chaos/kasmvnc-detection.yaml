@@ -1,0 +1,24 @@
+id: kasmvnc-detection
+
+info:
+  name: KasmVNC Detection
+  author: roguespider
+  severity: info
+  description: Detects the presence of KasmVNC, a web-based VNC client
+  reference:
+    - https://github.com/kasmtech/KasmVNC
+http:
+  - method: GET
+    path:        
+      - "{{BaseURL}}"
+    unsafe: true
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "kclient.js"
+        part: body

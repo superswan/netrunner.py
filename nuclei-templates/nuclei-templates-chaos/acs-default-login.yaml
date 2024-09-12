@@ -1,0 +1,73 @@
+id: acs-default-login
+
+info:
+  name: Active Security Cloud Default Login
+  author: roguespider
+  severity: info
+  description: |
+   checks Active Security Cloud for default credentials 
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/StandardApiAction_login.action"
+    params:
+      account: "admin"
+      password: "admin"
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"result":0'
+        part: body
+      - type: status
+        status:
+          - 200
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/StandardApiAction_login.action"
+    params:
+      account: "cmsv6"
+      password: "cmsv6"
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"result":0'
+        part: body
+      - type: status
+        status:
+          - 200
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/StandardApiAction_login.action"
+    params:
+      account: "admin"
+      password: "admin"
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"result":2'
+        part: body
+      - type: status
+        status:
+          - 200
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/StandardApiAction_login.action"
+    params:
+      account: "cmsv6"
+      password: "cmsv6"
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"result":2'
+        part: body
+      - type: status
+        status:
+          - 200

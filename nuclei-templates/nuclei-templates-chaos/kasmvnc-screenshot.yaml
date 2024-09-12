@@ -1,0 +1,30 @@
+id: kasmvnc-screenshot
+
+info:
+  name: Screenshot Using Headless Browser
+  author: roguespider
+  severity: info
+
+variables:
+  file: "{{Host}}"
+
+headless:
+  - steps:
+      - action: navigate
+        args:
+          url: "{{BaseURL}}"
+          unsafe: true
+      - action: waitload
+      - action: sleep
+        args:
+          duration: 9
+      - action: screenshot
+        args:
+          to: "data/kasmvnc/screenshots/kasmvnc_{{file}}.png"
+          fullpage: true
+
+    matchers:
+      - part: resp
+        type: word
+        words:
+          - "KasmVNC"

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scan-template>
+  <name>kasmvnc-scrot</name>
+  <shodan-query>http.html:"kasmvnc"</shodan-query>
+  <nuclei-command>nuclei -l data/kasmvnc/urls.txt -w nuclei-templates/nuclei-templates-chaos/kasmvnc-workflow.yaml -o data/kasmvnc/kasmvnc-nuclei.json -headless -bs 1 -c 1 -j -v</nuclei-command>
+  <parse-command>jq -r 'select(.info.severity == "info") | .url' data/${name}/kasmvnc-output.txt</parse-command>
+</scan-template>

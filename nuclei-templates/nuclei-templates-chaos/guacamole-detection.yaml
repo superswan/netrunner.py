@@ -1,0 +1,27 @@
+id: guacamole-detection
+
+info:
+  name: Apache Guacamole Detection
+  author: roguespider
+  severity: info
+  description: Detects the presence of Apache Guacamole remote desktop gateway
+  reference:
+    - https://guacamole.apache.org/
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    unsafe: true
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "js/rdp.js"
+        part: body
+      
+      - type: status
+        status:
+          - 200
+

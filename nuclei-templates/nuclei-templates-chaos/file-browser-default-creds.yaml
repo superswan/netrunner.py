@@ -1,0 +1,32 @@
+id: file-browser-default-creds
+
+info:
+  name: File Browser Default Credentials Check
+  author: roguespider
+  severity: high
+  description: Tests for default credentials (admin/admin) on File Browser login.
+  tags:
+    - file-browser
+    - default-login
+
+http:
+  - raw:
+      - |
+        POST /api/login HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (PlayStation; PlayStation 5/2.70) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15
+        Content-Type: application/json
+        Origin: {{BaseURL}}
+        Referer: {{BaseURL}}/login
+        Accept: */*
+        Accept-Language: en-US,en;q=0.5
+        Connection: keep-alive
+        Pragma: no-cache
+        Cache-Control: no-cache
+
+        {"username":"admin","password":"admin","recaptcha":""}
+
+    matchers:
+      - type: status
+        status:
+          - 200

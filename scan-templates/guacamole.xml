@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scan-template>
+  <name>guacamole</name>
+  <shodan-query>http.html:"js/rdp.js"</shodan-query>
+  <nuclei-command>nuclei -l data/${name}/targets.txt -w nuclei-templates/nuclei-templates-chaos/guacamole-detection.yaml -o data/${name}/${name}-nuclei.json -j -v</nuclei-command>
+  <parse-command>jq -r 'select(.info.severity == "info") | .url' data/${name}/${name}-output.txt</parse-command>
+</scan-template>

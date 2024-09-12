@@ -1,0 +1,11 @@
+id: file-browser-workflow
+
+info:
+  name: File Browser Detection and Security Check Workflow
+  author: roguespider
+  description: Detects File Browser instances, checks authentication status, and tests for default credentials.
+
+workflows:
+  - template: nuclei-templates/nuclei-templates-chaos/file-browser-detection.yaml
+  - template: nuclei-templates/nuclei-templates-chaos/file-browser-auth-check.yaml
+  - template: nuclei-templates/nuclei-templates-chaos/file-browser-default-creds.yaml

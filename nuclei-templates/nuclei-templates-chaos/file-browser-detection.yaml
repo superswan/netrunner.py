@@ -1,0 +1,32 @@
+id: file-browser-detection
+
+info:
+  name: File Browser Detection
+  author: roguespider
+  severity: info
+  description: Detects instances of the File Browser web application.
+  tags:
+    - file-browser
+    - tech-detect
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "window.FileBrowser"
+        part: body
+
+    extractors:
+      - type: regex
+        part: body
+        regex:
+          - '"Name":"(.*?)"'
+          - '"Version":"(.*?)"'

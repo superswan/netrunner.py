@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scan-template>
+  <name>active-security-cloud</name>
+  <shodan-query>http.html:"808gps"</shodan-query>
+  <nuclei-command>nuclei -l data/${name}/targets.txt -t nuclei-templates/nuclei-templates-chaos/acs-default-login.yaml -o data/${name}/${name}-nuclei.json -j -v</nuclei-command>
+  <parse-command>jq -r 'select(.info.severity == "info") | .url' data/${name}/example-output.txt</parse-command>
+</scan-template>

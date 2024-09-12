@@ -1,0 +1,36 @@
+id: guacamole-config
+
+info:
+  name: Apache Guacamole Config Grabber
+  author: roguespider
+  severity: info
+  description: grabs a guacamole config file
+  reference:
+    - https://guacamole.apache.org/
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/manifest.json"
+
+    matchers:
+      - type: word
+        words:
+          - '"name":'
+          - '"version":'
+        part: body
+
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: json
+        name: app_name
+        json:
+          - '.name'
+
+      - type: json
+        name: version
+        json:
+          - '.version'
